@@ -22,11 +22,9 @@ class OptionDialogFragment : DialogFragment() {
     private lateinit var rbMoyes: RadioButton
     private var optionDialogListener: OnOptionDialogListener? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_option_dialog, container, false)
     }
 
@@ -39,7 +37,6 @@ class OptionDialogFragment : DialogFragment() {
         rbLvg = view.findViewById(R.id.rb_lvg)
         rbMou = view.findViewById(R.id.rb_mou)
         rbMoyes = view.findViewById(R.id.rb_moyes)
-
         btnChoose.setOnClickListener {
             val checkedRadioButtonId = rgOptions.checkedRadioButtonId
             if (checkedRadioButtonId != -1) {
@@ -61,7 +58,6 @@ class OptionDialogFragment : DialogFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         val fragment = parentFragment
 
         if (fragment is DetailCategoryFragment) {

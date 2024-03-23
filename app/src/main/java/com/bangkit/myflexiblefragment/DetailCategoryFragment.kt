@@ -1,5 +1,6 @@
 package com.bangkit.myflexiblefragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,7 +16,6 @@ class DetailCategoryFragment : Fragment() {
     private lateinit var tvCategoryDescription: TextView
     private lateinit var btnProfile: Button
     private lateinit var btnShowDialog: Button
-
     var description: String? = null
 
     companion object {
@@ -23,10 +23,8 @@ class DetailCategoryFragment : Fragment() {
         var EXTRA_DESCRIPTION = "extra_description"
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_detail_category, container, false)
     }
@@ -42,7 +40,7 @@ class DetailCategoryFragment : Fragment() {
             val optionDialogFragment = OptionDialogFragment()
 
             val fragmentManager = childFragmentManager
-            optionDialogFragment.show(fragmentManager, optionDialogFragment::class.java.simpleName)
+            optionDialogFragment.show(fragmentManager, OptionDialogFragment::class.java.simpleName)
         }
 
         if (savedInstanceState != null) {
@@ -55,13 +53,15 @@ class DetailCategoryFragment : Fragment() {
             tvCategoryName.text = categoryName
             tvCategoryDescription.text = description
         }
-
+        btnProfile.setOnClickListener{
+            val intent = Intent(requireActivity(), ProfileActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    internal val optionDialogFragment: OptionDialogFragment.OnOptionDialogListener = object : OptionDialogFragment.OnOptionDialogListener{
+    internal var optionDialogListener: OptionDialogFragment.OnOptionDialogListener = object : OptionDialogFragment.OnOptionDialogListener {
         override fun onOptionChosen(text: String?) {
             Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT).show()
         }
     }
-
 }
